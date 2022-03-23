@@ -1,16 +1,5 @@
-runtime: nodejs12
-env: standard
-instance_class: F1
-handlers:
-  - url: /(.*\..+)$
-    static_files: build/\1
-    require_matching_file: false
-    upload: build/(.*\..+)$
-  - url: /.*
-    static_files: build/index.html
-    require_matching_file: false
-    upload: build/index.html
-  - url: .*
-    script: auto
-#service_account: address-serviceability@appspot.gserviceaccount.com
-service_account: 676984131022@cloudbuild.gserviceaccount.com
+steps:
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: 'bash'
+  args: ['-c', 'gcloud config set app/cloud_build_timeout 1600 && gcloud app deploy']
+timeout: '1600s'
