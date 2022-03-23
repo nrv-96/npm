@@ -12,11 +12,5 @@ handlers:
     upload: build/index.html
   - url: .*
     script: auto
-automatic_scaling:
-  min_idle_instances: automatic
-  max_idle_instances: automatic
-  min_pending_latency: automatic
-  max_pending_latency: automatic
-network: {}
 #service_account: address-serviceability@appspot.gserviceaccount.com
 service_account: 676984131022@cloudbuild.gserviceaccount.com
