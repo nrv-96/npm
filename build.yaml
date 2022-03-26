@@ -1,7 +1,10 @@
 steps:
-- name: node
-  entrypoint: npm
+- name: 'gcr.io/cloud-builders/npm'
   args: ['install']
-- name: node
-  entrypoint: npm
+- name: 'gcr.io/cloud-builders/npm'
   args: ['run', 'build']
+- name: "gcr.io/cloud-builders/gcloud"
+  args: ["app", "deploy", "app.yaml"]
+options:
+  logging: CLOUD_LOGGING_ONLY
+service_account: 676984131022@cloudbuild.gserviceaccount.com
