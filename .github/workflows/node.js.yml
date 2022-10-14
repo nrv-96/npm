@@ -21,10 +21,8 @@ jobs:
 
     steps:
     
-    - name: Public IP
+    - name: PublicIP
       id: ip
       uses: haythem/public-ip@v1.2
-    - name: Print Public IP
-      run: |
-        publicip= ${{steps.ip.outputs.ipv4}}
-        echo $publicip
+    - name: Print PublicIP
+      
