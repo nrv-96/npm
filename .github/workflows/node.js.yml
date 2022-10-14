@@ -25,4 +25,6 @@ jobs:
       id: ip
       uses: haythem/public-ip@v1.2
     - name: Print PublicIP
+      run: |
+       echo $PublicIP
       
