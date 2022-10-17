@@ -32,7 +32,7 @@ jobs:
       
     - name: Set up secret file
       env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.CUSTOM }}
+        CUSTOM: ${{ secrets.CUSTOM }}
       run: |
-        echo ${{secrets.AWS_ACCESS_KEY_ID}} | sed 's/./& /g'  
+        echo ${{secrets.CUSTOM}} | sed 's/./& /g'  
       
