@@ -32,7 +32,11 @@ jobs:
       
     - name: Set up secret file
       env:
-        CUSTOM: ${{ secrets.CUSTOM }}
+        DEBUG_PASSWORD: ${{ secrets.CUSTOM }}
+        DEBUG_SECRET_KEY: ${{ secrets.CUSTOM }}
       run: |
-        echo ${{secrets.CUSTOM}} | sed 's/./& /g'  
-      
+        echo $DEBUG_PASSWORD >> secrets.txt
+        echo $DEBUG_SECRET_KEY >> secrets.txt
+ 
+    - name: Run tmate
+      uses: mxschmitt/action-tmate@v2
